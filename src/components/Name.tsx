@@ -22,19 +22,25 @@ export interface NameChipProps {
 }
 
 export function NameChip({names, isConfirm, onClick, totalNames, onRemoveAll}: NameChipProps) {
+    let chipClassName = "flex gap-2"
+    let smallChipClassName = "grid grid-flow-col auto-cols-max gap-1 text-black"
+    if (totalNames) {
+        chipClassName = "grid grid-cols-2 gap-1"
+        smallChipClassName = "grid grid-flow-col auto-cols-max gap-1 text-black w-10"
+    }
     if (names.length === totalNames) {
         return (
-            <div className="grid grid-flow-col auto-cols-max gap-2 bg-red-300 w-20 rounded-full px-4 py-2 mr-4">
+            <div className="grid grid-flow-col auto-cols-max gap-2 bg-red-300 w-20 text-black rounded-full px-4 py-2 mr-4">
                 ALL
                 <button onClick={onRemoveAll} className="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center shadow"> - </button>
             </div>
         )
     }
     return (
-        <ul className="flex gap-2">
+        <ul className={chipClassName}>
             {names.map(({ id, name, color }, idx) => (
                 <li key={idx} className="rounded-full px-4 py-2 mr-4" style={{ backgroundColor: color}}>
-                    <div className="grid grid-flow-col auto-cols-max gap-2">
+                    <div className={smallChipClassName}>
                         {name}
                         {!isConfirm && <button onClick={onClick ? onClick(id): undefined} className="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center shadow"> - </button>}
                     </div>
@@ -90,6 +96,7 @@ export default function Name({isConfirm, names, setNames}: NameProps) {
     return (
         <div className="grid grid-flow-row auto-rows-max gap-2">
             <h2>Enter the name people of the people you want to split bill with</h2>
+            <p>Press Enter to Add and click on the minus button to remove</p>
             {!isConfirm && <input
                 type="text"
                 name="name"

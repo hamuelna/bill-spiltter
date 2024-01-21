@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+    @apply text-4xl font-bold text-gray-800;
+    /* Customize as needed */
+}
+
+h2 {
+    @apply text-3xl font-semibold text-gray-700;
+    /* Customize as needed */
+}

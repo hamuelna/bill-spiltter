@@ -29,7 +29,7 @@ export default function Summary({names, table}: SummaryProps) {
                         <tr key={id}>
                             <td style={{backgroundColor: color}} className={tableClassName} key={`name-${id}`}>{name}</td>
                             <td style={{ backgroundColor: color }} className={tableClassName} key={`payed-${id}`}>
-                                {payment.find(({id:pid}) => id === pid)?.toPay}
+                                {payment.find(({id:pid}) => id === pid)?.toPay.toFixed(2)}
                             </td>
                         </tr>
                     ))}
