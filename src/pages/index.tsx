@@ -1,11 +1,13 @@
 import Head from "next/head";
 import Name, { type ColoredNameProps } from '../components/Name'
-import Bill from "~/components/Bill";
+import Bill, { type TableProps } from "~/components/Bill";
 import { useState } from "react"
+import Summary from "~/components/Summary";
 
 export default function Home() {
   const [isConfirm, setIsConfirm] = useState<boolean>(false)
   const [names, setNames] = useState<ColoredNameProps[]>([])
+  const [table, setTable] = useState<Array<TableProps>>([])
 
   const handleIsConfirm = () => {
     if (!isConfirm && names.length > 1) {
@@ -27,7 +29,8 @@ export default function Home() {
           {!isConfirm && <div>
             <button onClick={handleIsConfirm} className="bg-green-500 text-white w-[100px] h-[35px] rounded items-center" disabled={isConfirm || names.length < 2}> Confirm </button>  
           </div>}
-          <Bill {...{names}}/>
+          <Bill {...{names, table, setTable}}/>
+          <Summary {...{names, table}} />
       </main>
     </>
   );

@@ -1,25 +1,27 @@
-import React from "react"
+import React, { type Dispatch } from "react"
 import { useState } from "react"
 import { NameChip, type ColoredNameProps } from "./Name"
 import AddName from "./AddName"
 
 
-interface TableProps {
+export interface TableProps {
     name: string
     price: number
     payer: number[]
+    
 }
 
-interface BillProps {
+export interface BillProps {
     names: ColoredNameProps[]
+    table: TableProps[]
+    setTable: Dispatch<React.SetStateAction<TableProps[]>>
 }
 
-export default function Bill({ names }: BillProps) {
+export default function Bill({ names, table, setTable }: BillProps) {
     const inputClassName = "border border-black rounded"
     const tableClassName = "text-left px-4 py-2"
     const [price, setPrice] = useState(0)
     const [name, setName] = useState("")
-    const [table, setTable] = useState<Array<TableProps>>([])
 
     const handleAddPayer = (tblIdx: number) => (payerIdx: number) => () => {
         const newTable = table.map((row, idx) => tblIdx === idx ? {...row, payer: [...row.payer, payerIdx]} : row)
