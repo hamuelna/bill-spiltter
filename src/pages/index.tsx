@@ -28,6 +28,10 @@ export default function Home() {
           <Name {...{isConfirm, names, setNames}} />
           <Bill {...{names, table, setTable}}/>
           <Summary {...{names, table}} />
+        <footer className="bg-gray-800 text-white text-center p-4">
+          <p className="text-lg">Developed by Worapol B.</p>
+          <p className="text-sm text-gray-400">© 2024 Hamnet.work All rights reserved.</p>
+        </footer>
       </main>
     </>
   );

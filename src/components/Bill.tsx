@@ -60,8 +60,8 @@ export default function Bill({ names, table, setTable }: BillProps) {
                 const taxName = `${pureTaxName} (${tax}%)`
                 const chargeName = `${pureChargeName} (${charge}%)`
                 const purePriceTable = table.filter(({ name: rowName }) => ![pureTaxName, pureChargeName].includes(getPureName(rowName)))
-                const totalChargePrice = purePriceTable.reduce((prev, { price }) => prev + price, 0) * (charge / 100)
-                const totalTaxPrice = (purePriceTable.reduce((prev, { price }) => prev + price, 0) + totalChargePrice) * (tax / 100)
+                const totalChargePrice = (purePriceTable.reduce((prev, { price }) => prev + price, 0) + price) * (charge / 100)
+                const totalTaxPrice = (purePriceTable.reduce((prev, { price }) => prev + price, 0) + price + totalChargePrice) * (tax / 100)
                 const chargeRow = {
                     name: chargeName, price: totalChargePrice, payer: table.find(({ name }) => getPureName(name) === pureChargeName)?.payer ?? []
                 }
@@ -102,7 +102,7 @@ export default function Bill({ names, table, setTable }: BillProps) {
 
     const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key == 'Enter' || event.key == 'NumpadEnter') {
-            handleSetTable(false)
+            handleSetTable(false)()
         }
     }
 
